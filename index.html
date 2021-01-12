@@ -2,7 +2,70 @@
 <html>
 <body>
 <h1 style="text-align:center"> Welcome to thienducst.ga </h1>
-<p>Hehehe.</p>
+<div class="container p-3">
+        <div class="countdown">
+        <span>CHỈ CÒN </span>
+        <div id="clockdiv">
+            <div>
+                <span class="days"></span>
+                <div class="smalltext">Ngày</div>
+            </div>
+            <div>
+                <span class="hours"></span>
+                <div class="smalltext">Giờ</div>
+            </div>
+            <div>
+                <span class="minutes"></span>
+                <div class="smalltext">Phút</div>
+            </div>
+            <div>
+                <span class="seconds"></span>
+                <div class="smalltext">Giây</div>
+            </div>
+        </div>
+        <span> là đến TẾT Tân Sửu 2021</span>
+        </div>
+    </div>
 </body>
+  <script>
+  function getTimeRemaining(endtime) {
+          let total = Date.parse(endtime) - Date.parse(new Date());
+      let seconds = Math.floor((total / 1000) % 60);
+      let minutes = Math.floor((total / 1000 / 60) % 60);
+      let hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+      let days = Math.floor(total / (1000 * 60 * 60 * 24));
+      
+      return {
+        total,
+        days,
+        hours,
+        minutes,
+        seconds
+      };
+    }
+    
+    function initializeClock(id, endtime) {
+      let clock = document.getElementById(id);
+      let daysSpan = clock.querySelector('.days');
+      let hoursSpan = clock.querySelector('.hours');
+      let minutesSpan = clock.querySelector('.minutes');
+      let secondsSpan = clock.querySelector('.seconds');
+    
+      function updateClock() {
+        let t = getTimeRemaining(endtime);
+        daysSpan.innerHTML = t.days;
+        hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+        minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+        secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+    
+        if (t.total <= 0) {
+          clearInterval(timeinterval);
+        }
+      }
+      updateClock();
+      let timeinterval = setInterval(updateClock, 1000);
+    }
+    initializeClock('clockdiv', new Date('Feb 12, 2021 00:00:00'));
+  </script>
 </html>
 
